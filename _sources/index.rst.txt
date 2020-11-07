@@ -1,7 +1,7 @@
 SIQ025 - Software de modelización de sistemas industriales
 ==========================================================
 
-Bienvenidos!
+Bienvenidos, esperamos que os esté gustando la asignatura!
 
 Esta es la segunda parte de la asignatura *SIQ025 - Software de modelización
 de sistemas industriales* del máster en Matemática computacional de la UJI.
