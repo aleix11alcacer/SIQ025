@@ -1,5 +1,5 @@
-Creación de un paquete de R
-===========================
+Creando un paquete de R
+=======================
 
 Objetivos a alcanzar:
 
