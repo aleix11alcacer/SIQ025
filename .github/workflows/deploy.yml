@@ -18,8 +18,8 @@ jobs:
           pip install -r requirements.txt
 
       - name: Generate documentation
-          run: |
-            sphinx-build -b html ./docs/ ./build/docs/
+        run: |
+          sphinx-build -b html ./docs/ ./build/docs/
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
