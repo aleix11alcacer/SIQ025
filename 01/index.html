@@ -1,0 +1,313 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Índice" href="../genindex.html" /><link rel="search" title="Búsqueda" href="../search.html" /><link rel="next" title="Activación de una CI/CD" href="../02/index.html" /><link rel="prev" title="SIQ025 - Software de modelización de sistemas industriales" href="../index.html" />
+
+    <meta name="generator" content="sphinx-3.3.0, furo 2020.11.01.beta14"/>
+        <title>Creación de un paquete de R - SIQ025</title>
+      <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
+    <link rel="stylesheet" href="../_static/styles/default.css?6abcebeb92e275e57ec82cd0">
+    <link rel="stylesheet" href="../_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script><script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script src="../_static/scripts/main.js?6abcebeb92e275e57ec82cd0"></script></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+<div class="page">
+  <header class="mobile-header">
+    <label class="header-left nav-overlay-icon" for="__navigation">
+      <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+    </label>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">SIQ025</div></a>
+    </div>
+    <div class="header-right"></div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/logo2.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">SIQ025</span>
+</a><form class="sidebar-search-container" method="get" action="../search.html">
+  <input class="sidebar-search" placeholder="Search" name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll">
+  <div class="sidebar-tree">
+    <ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Creación de un paquete de R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/index.html">Activación de una CI/CD</a></li>
+</ul>
+
+  </div>
+  <div id="ethical-ad-placement"></div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <div class="section" id="creacion-de-un-paquete-de-r">
+<h1>Creación de un paquete de R<a class="headerlink" href="#creacion-de-un-paquete-de-r" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Objetivos a alcanzar:</p>
+<ul class="simple">
+<li><p>Creación de un paquete de R usando RStudio.</p></li>
+<li><p>Uso de un sistema de gestión de versiones.</p></li>
+<li><p>Sincronización de un paquete con una copia almacenada en la nube.</p></li>
+</ul>
+<div class="admonition-referencias admonition">
+<p class="admonition-title">Referencias</p>
+<p><a class="reference external" href="https://r-pkgs.org/preface.html">R Packages (Hadley Wickham, Jennifer Bryan)</a></p>
+</div>
+<div class="section" id="inicializacion-del-paquete">
+<h2>Inicialización del paquete<a class="headerlink" href="#inicializacion-del-paquete" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>El primer paso que tenemos que hacer es crear en Github un repositorio
+(público) titulado <em>SIQ025</em>.</p>
+<p>A continuación, desde RStudioCloud vamos a crear un nuevo proyecto a partir
+del repositorio de Github. Para ello, seleccionamos <em>New Project -&gt; New
+Project from Git Repository</em> y introducimos la url de nuestro
+repositorio (<em>https://github.com/&lt;username&gt;/SIQ025.git</em>).
+Una vez creado, abrimos el proyecto de R.</p>
+<p>Antes de pasar a la creación de nuestro paquete, es recomendable instalar el
+paquete <a class="reference external" href="https://www.r-project.org/nosvn/pandoc/devtools.html">devtools</a>
+para facilitar nuestro desarrollo. Este paquete se puede instalar ejecutando
+desde la consola de R el siguiente comando:</p>
+<div class="highlight-R notranslate"><div class="table-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="s">"devtools"</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div></div>
+</div>
+<div class="section" id="estructura-del-paquete">
+<h2>Estructura del paquete<a class="headerlink" href="#estructura-del-paquete" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>La estructura más básica de un proyecto de R es la siguiente :</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/
+├── DESCRIPTION
+├── NAMESPACE
+└── R/
+    └── ...
+</pre></div>
+</div>
+<p>En nuestro caso, para generar todos estos ficheros simplemente tenemos que
+ejecutar la siguiente instrucción desde la consola de R:</p>
+<div class="highlight-R notranslate"><div class="table-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">devtools</span><span class="o">::</span><span class="nf">create</span><span class="p">(</span><span class="s">"."</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div></div>
+<div class="section" id="metadatos">
+<h3>Metadatos<a class="headerlink" href="#metadatos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El fichero <code class="docutils literal notranslate"><span class="pre">DESCRIPTION</span></code> contiene todos los metadatos que describen el
+paquete:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Package: project
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R:
+    person(given = "First",
+           family = "Last",
+           role = c("aut", "cre"),
+           email = "first.last@example.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: What the package does (one paragraph).
+License: `use_mit_license()`, `use_gpl3_license()` or friends to
+    pick a license
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+</pre></div>
+</div>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Title</span></code>: contiene la descripción en una línea del paquete. Debe ser texto
+sin formato.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Version</span></code>: determina la versión actual del paquete.</p>
+<div class="admonition seealso">
+<p class="admonition-title">Ver también</p>
+<p>Información sobre como determinar el número de versión:
+<a class="reference external" href="https://r-pkgs.org/release.html#release-version">https://r-pkgs.org/release.html#release-version</a>.</p>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Authors</span></code>: muestra información sobre los autores del paquete.</p>
+<ul class="simple">
+<li><p>El nombre está especificado por los parametros <code class="docutils literal notranslate"><span class="pre">given</span></code> y <code class="docutils literal notranslate"><span class="pre">family</span></code>.</p></li>
+<li><p>La dirección de correo electrónico se encuentra en <code class="docutils literal notranslate"><span class="pre">email</span></code>.</p></li>
+<li><p>El rol de cada persona en el paquete (autor o creador) está descrito por el
+campo <code class="docutils literal notranslate"><span class="pre">rol</span></code>.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Description</span></code>: contiene una descripción más detallada que el título. Puede
+contener varias oraciones, pero está limitada a un párrafo.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">License</span></code>: indica la licencia que usa el paquete.</p></li>
+</ul>
+<p>Una vez visto en qué consiste el fichero <code class="docutils literal notranslate"><span class="pre">DESCRIPTION</span></code>, vamos a actualizarlo
+con nuestros datos. Un ejemplo podría ser:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Package: SIQ025
+Title: Software de modelización de sistemas industriales
+Version: 0.0.0.9000
+Authors@R:
+    person(given = "Aleix",
+           family = "Alcacer",
+           role = c("cre"),
+           email = "aalcacer@uji.com"))
+Description: SIQ025 es un paquete de R creado en la asignatura de
+    modelización de sistemas industriales. Esta asignatura está incluida
+    dentro del máster en Matemática Computacional de la UJI.
+License: use_mit_license()
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+</pre></div>
+</div>
+</div>
+<div class="section" id="espacio-de-nombres">
+<h3>Espacio de nombres<a class="headerlink" href="#espacio-de-nombres" title="Enlazar permanentemente con este título">¶</a></h3>
+</div>
+<div class="section" id="ficheros-de-r">
+<h3>Ficheros de R<a class="headerlink" href="#ficheros-de-r" title="Enlazar permanentemente con este título">¶</a></h3>
+</div>
+</div>
+</div>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../02/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Activación de una CI/CD</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../index.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Home</div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+          <span class="copyright">Copyright &copy; 2020, Aleix Alcacer Sales</span> |
+          Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using
+          <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contenidos
+          </span>
+        </div>
+        <div class="toc-tree">
+          <ul>
+<li><a class="reference internal" href="#">Creación de un paquete de R</a><ul>
+<li><a class="reference internal" href="#inicializacion-del-paquete">Inicialización del paquete</a></li>
+<li><a class="reference internal" href="#estructura-del-paquete">Estructura del paquete</a><ul>
+<li><a class="reference internal" href="#metadatos">Metadatos</a></li>
+<li><a class="reference internal" href="#espacio-de-nombres">Espacio de nombres</a></li>
+<li><a class="reference internal" href="#ficheros-de-r">Ficheros de R</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+      
+      
+    </aside>
+  </main>
+</div>
+  </body>
+</html>
