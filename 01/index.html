@@ -6,7 +6,7 @@
     <meta name="generator" content="sphinx-3.3.0, furo 2020.11.01.beta14"/>
         <title>Creando un paquete de R - SIQ025</title>
       <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
-    <link rel="stylesheet" href="../_static/styles/default.css?b06abe33303a7439eafdf237">
+    <link rel="stylesheet" href="../_static/styles/default.css?4965e92d07fbea564f1a484d">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
     
@@ -43,7 +43,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/language_data.js"></script>
     <script src="../_static/translations.js"></script>
-    <script src="../_static/scripts/main.js?b06abe33303a7439eafdf237"></script></head>
+    <script src="../_static/scripts/main.js?4965e92d07fbea564f1a484d"></script></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -130,36 +130,33 @@
         </label>
         <div class="section" id="creando-un-paquete-de-r">
 <h1>Creando un paquete de R<a class="headerlink" href="#creando-un-paquete-de-r" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>Objetivos a alcanzar:</p>
+<div class="admonition-objetivos admonition">
+<p class="admonition-title">Objetivos</p>
 <ul class="simple">
-<li><p>Creación de un paquete de R usando RStudio.</p></li>
-<li><p>Uso de un sistema de gestión de versiones.</p></li>
-<li><p>Sincronización de un paquete con una copia almacenada en la nube.</p></li>
+<li><p>Aprender qué es un paquete de R.</p></li>
+<li><p>Conocer las principales partes de un paquete.</p></li>
+<li><p>Crear un paquete de R usando RStudio.</p></li>
 </ul>
+</div>
 <div class="admonition-referencias admonition">
 <p class="admonition-title">Referencias</p>
 <p><a class="reference external" href="https://r-pkgs.org/preface.html">R Packages (Hadley Wickham, Jennifer Bryan)</a></p>
 </div>
-<div class="section" id="inicializacion-del-paquete">
-<h2>Inicialización del paquete<a class="headerlink" href="#inicializacion-del-paquete" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>El primer paso que tenemos que hacer es crear en Github un repositorio
-(público) titulado <em>SIQ025</em>.</p>
-<p>A continuación, desde RStudioCloud vamos a crear un nuevo proyecto a partir
-del repositorio de Github. Para ello, seleccionamos <em>New Project -&gt; New
-Project from Git Repository</em> y introducimos la url de nuestro
-repositorio (<em>https://github.com/&lt;username&gt;/SIQ025.git</em>).
-Una vez creado, abrimos el proyecto de R.</p>
-<p>Antes de pasar a la creación de nuestro paquete, es recomendable instalar el
-paquete <a class="reference external" href="https://www.r-project.org/nosvn/pandoc/devtools.html">devtools</a>
-para facilitar nuestro desarrollo. Este paquete se puede instalar ejecutando
-desde la consola de R el siguiente comando:</p>
-<div class="highlight-R notranslate"><div class="table-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="s">"devtools"</span><span class="p">)</span>
-</pre></div>
-</td></tr></table></div></div>
+<div class="section" id="que-es-un-paquete-de-r">
+<h2>¿Qué es un paquete de R?<a class="headerlink" href="#que-es-un-paquete-de-r" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>En R, la unidad fundamental de código que se puede compartir es el paquete.
+Un paquete puede agrupar código, datos, documentación y tests, y, además, es
+fácil de compartir con otros.</p>
+<p>Esta última característica es la que ha situado a R entre los lenguajes de
+programación más usados en el mundo. Como actualmente existen más de 14000
+paquetes en el <a class="reference external" href="https://cran.r-project.org/">CRAN</a>, la probabilidad de
+que alguien haya resuelto nuestra necesidad (o problema) es muy alto. Por lo
+tanto, en lugar de implementar nosotros las solución, podemos beneficiarnos del
+trabajo de otro descargandonos su paquete.</p>
 </div>
-<div class="section" id="estructura-del-paquete">
-<h2>Estructura del paquete<a class="headerlink" href="#estructura-del-paquete" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>La estructura más básica de un proyecto de R es la siguiente :</p>
+<div class="section" id="estructura-de-un-paquete">
+<h2>Estructura de un paquete<a class="headerlink" href="#estructura-de-un-paquete" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>La estructura más básica de un paquete de R es la siguiente:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/
 ├── DESCRIPTION
 ├── NAMESPACE
@@ -167,11 +164,6 @@ desde la consola de R el siguiente comando:</p>
     └── ...
 </pre></div>
 </div>
-<p>En nuestro caso, para generar todos estos ficheros simplemente tenemos que
-ejecutar la siguiente instrucción desde la consola de R:</p>
-<div class="highlight-R notranslate"><div class="table-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">devtools</span><span class="o">::</span><span class="nf">create</span><span class="p">(</span><span class="s">"."</span><span class="p">)</span>
-</pre></div>
-</td></tr></table></div></div>
 <div class="section" id="metadatos">
 <h3>Metadatos<a class="headerlink" href="#metadatos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>El fichero <code class="docutils literal notranslate"><span class="pre">DESCRIPTION</span></code> contiene todos los metadatos que describen el
@@ -195,6 +187,7 @@ RoxygenNote: 7.1.1
 </pre></div>
 </div>
 <ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Package</span></code>: indica el nombre del paquete.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Title</span></code>: contiene la descripción en una línea del paquete. Debe ser texto
 sin formato.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Version</span></code>: determina la versión actual del paquete.</p>
@@ -206,43 +199,45 @@ sin formato.</p></li>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Authors</span></code>: muestra información sobre los autores del paquete.</p>
 <ul class="simple">
-<li><p>El nombre está especificado por los parametros <code class="docutils literal notranslate"><span class="pre">given</span></code> y <code class="docutils literal notranslate"><span class="pre">family</span></code>.</p></li>
+<li><p>El nombre está especificado por los parametros <code class="docutils literal notranslate"><span class="pre">given</span></code> (nombre) y
+<code class="docutils literal notranslate"><span class="pre">family</span></code> (apellidos).</p></li>
 <li><p>La dirección de correo electrónico se encuentra en <code class="docutils literal notranslate"><span class="pre">email</span></code>.</p></li>
 <li><p>El rol de cada persona en el paquete (autor o creador) está descrito por el
 campo <code class="docutils literal notranslate"><span class="pre">rol</span></code>.</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Description</span></code>: contiene una descripción más detallada que el título. Puede
-contener varias oraciones, pero está limitada a un párrafo.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">License</span></code>: indica la licencia que usa el paquete.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Description</span></code>: contiene una descripción del paquete más detallada que el
+título. Puede contener varias oraciones, pero está limitada a un párrafo.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">License</span></code>: indica la licencia que usa el paquete. En software de código
+abierto, una de las licencias más permisivas es la <a class="reference external" href="https://opensource.org/licenses/MIT">licencia MIT</a>.</p></li>
 </ul>
-<p>Una vez visto en qué consiste el fichero <code class="docutils literal notranslate"><span class="pre">DESCRIPTION</span></code>, vamos a actualizarlo
-con nuestros datos. Un ejemplo podría ser:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Package: SIQ025
-Title: Software de modelización de sistemas industriales
-Version: 0.0.0.9000
-Authors@R:
-    person(given = "Aleix",
-           family = "Alcacer",
-           role = c("cre"),
-           email = "aalcacer@uji.com"))
-Description: SIQ025 es un paquete de R creado en la asignatura de
-    modelización de sistemas industriales. Esta asignatura está incluida
-    dentro del máster en Matemática Computacional de la UJI.
-License: use_mit_license()
-Encoding: UTF-8
-LazyData: true
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
-</pre></div>
-</div>
-</div>
-<div class="section" id="espacio-de-nombres">
-<h3>Espacio de nombres<a class="headerlink" href="#espacio-de-nombres" title="Enlazar permanentemente con este título">¶</a></h3>
 </div>
 <div class="section" id="ficheros-de-r">
 <h3>Ficheros de R<a class="headerlink" href="#ficheros-de-r" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El directorio <code class="docutils literal notranslate"><span class="pre">R/</span></code>, tal y como su propio nombre indica, contiene todo el
+código R que necesita el paquete.</p>
+<p>Así, todas las funciones usadas en el paquete van a estar implementadas
+en ficheros incluidos en esta carpeta. En concreto, estas funciones de R
+deben estar implementadas en scripts de R, es decir, en ficheros con la
+extensión <code class="docutils literal notranslate"><span class="pre">.R</span></code>.</p>
 </div>
+<div class="section" id="espacio-de-nombres">
+<h3>Espacio de nombres<a class="headerlink" href="#espacio-de-nombres" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Finalmente, el fichero <code class="docutils literal notranslate"><span class="pre">NAMESPACE</span></code> contiene las funciones que los usuarios
+externos del paquete van a poder usar cuando lo importen desde R.</p>
+<p>Este fichero se genera de forma automática usando el paquete <a class="reference external" href="https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html">roxygen2</a>
+(lo veremos en profundidad en la <a class="reference external" href="../03/index.html">lección 3</a>).</p>
+</div>
+</div>
+<div class="section" id="ejercicio">
+<h2>Ejercicio<a class="headerlink" href="#ejercicio" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Antes de pasar a la creación de nuestro paquete, es recomendable instalar el
+paquete <a class="reference external" href="https://www.r-project.org/nosvn/pandoc/devtools.html">devtools</a>
+para facilitar nuestro desarrollo. Este paquete se puede instalar ejecutando
+desde la consola de R el siguiente comando:</p>
+<div class="highlight-R notranslate"><div class="table-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="s">"devtools"</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div></div>
 </div>
 </div>
 
@@ -293,13 +288,14 @@ RoxygenNote: 7.1.1
         <div class="toc-tree">
           <ul>
 <li><a class="reference internal" href="#">Creando un paquete de R</a><ul>
-<li><a class="reference internal" href="#inicializacion-del-paquete">Inicialización del paquete</a></li>
-<li><a class="reference internal" href="#estructura-del-paquete">Estructura del paquete</a><ul>
+<li><a class="reference internal" href="#que-es-un-paquete-de-r">¿Qué es un paquete de R?</a></li>
+<li><a class="reference internal" href="#estructura-de-un-paquete">Estructura de un paquete</a><ul>
 <li><a class="reference internal" href="#metadatos">Metadatos</a></li>
-<li><a class="reference internal" href="#espacio-de-nombres">Espacio de nombres</a></li>
 <li><a class="reference internal" href="#ficheros-de-r">Ficheros de R</a></li>
+<li><a class="reference internal" href="#espacio-de-nombres">Espacio de nombres</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#ejercicio">Ejercicio</a></li>
 </ul>
 </li>
 </ul>
