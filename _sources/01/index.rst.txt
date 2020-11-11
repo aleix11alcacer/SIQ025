@@ -121,12 +121,64 @@ Ejercicio
 ---------
 
 Antes de pasar a la creación de nuestro paquete, es recomendable instalar el
-paquete `devtools <https://www.r-project.org/nosvn/pandoc/devtools.html>`_
-para facilitar nuestro desarrollo. Este paquete se puede instalar ejecutando
-desde la consola de R el siguiente comando:
+paquete `devtools <https://usethis.r-lib.org>`_, yaa que nos va facilitar
+todo el desarrollo. Este paquete se puede instalar ejecutando desde la
+consola de R el siguiente comando:
 
 .. code-block:: R
    :linenos:
 
-   install.packages("devtools")
+   install.packages("usethis")
+
+
+Creación del paquete
+++++++++++++++++++++
+
+En primer lugar abrimos RStudio y en la consola de R ejecutamos el siguiente
+comando:
+
+.. code-block:: R
+
+   usethis::create_package("~/SIQ025")
+
+Al ejecutar este comando se nos abrirá otra pantalla de RStudio en el
+directorio del paquete que acabamos de crear. Como podemos ver, se ha creado
+de forma automática la estructura básica del paquete (vista anteriormente)
+en el directorio ``~/SIQ025`` de nuestro ordenador.
+
+Ahora, abrimos el fichero ``DESCRITION``, lo rellenamos con los datos
+de nuestro paquete y lo guardamos.
+
+.. note::
+
+   Inidcar que se puede copiar este ejemplo o proponer otro.
+
+En mi caso, el fichero quedaría de la siguiente forma:
+
+.. code-block:: none
+
+   Package: SIQ025
+   Title: Software de modelización de sistemas industriales
+   Version: 0.0.0.9000
+   Authors@R:
+       person(given = "Aleix",
+              family = "Alcacer",
+              role = c("cre"),
+              email = "aalcacer@uji.com"))
+   Description: SIQ025 es un paquete de R creado en la asignatura de
+       modelización de sistemas industriales. Esta asignatura está incluida
+       dentro del máster en Matemática Computacional de la UJI.
+   License: use_mit_license()
+   Encoding: UTF-8
+   LazyData: true
+   Roxygen: list(markdown = TRUE)
+   RoxygenNote: 7.1.1
+
+Una vez completado el fichero ``DESCRIPTION`` pasamos a crear las funciones
+del paquete. Por ahora, solo crearemos dos funciones: una que calcule la suma
+dos números y otra que calcule la diferencia.
+
+Para ello, crearemos dentro del directorio ``R/`` dos ficheros llamados
+``suma.R`` y ``resta.R``.
+
 
