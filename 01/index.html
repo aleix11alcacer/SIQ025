@@ -6,7 +6,7 @@
     <meta name="generator" content="sphinx-3.3.0, furo 2020.11.10.beta15"/>
         <title>Creando un paquete de R - SIQ025</title>
       <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
-    <link rel="stylesheet" href="../_static/styles/furo.css?state=794b0c7c01de24a86f4ea3ae">
+    <link rel="stylesheet" href="../_static/styles/furo.css?state=6650f610f265e348220c1579">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
     
@@ -43,7 +43,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/language_data.js"></script>
     <script src="../_static/translations.js"></script>
-    <script src="../_static/scripts/main.js?state=794b0c7c01de24a86f4ea3ae"></script></head>
+    <script src="../_static/scripts/main.js?state=6650f610f265e348220c1579"></script></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -236,15 +236,16 @@ externos del paquete van a poder usar cuando lo importen desde R.</p>
 (lo veremos en profundidad en la <a class="reference external" href="../03/index.html">lección 3</a>).</p>
 </div>
 </div>
-<div class="section" id="ejercicio">
-<h2>Ejercicio<a class="headerlink" href="#ejercicio" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Antes de pasar a la creación de nuestro paquete, es recomendable instalar el
-paquete <a class="reference external" href="https://usethis.r-lib.org">devtools</a>, yaa que nos va facilitar
-todo el desarrollo. Este paquete se puede instalar ejecutando desde la
-consola de R el siguiente comando:</p>
-<div class="highlight-R notranslate"><div class="table-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="s">"usethis"</span><span class="p">)</span>
+<div class="section" id="practica">
+<h2>Práctica<a class="headerlink" href="#practica" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Antes de pasar a la creación de nuestro paquete, es recomendable instalar los
+paquete <a class="reference external" href="https://usethis.r-lib.org">usethis</a> y <a class="reference external" href="https://www.r-project.org/nosvn/pandoc/devtools.html">devtools</a>, ya que nos
+van a facilitar todo el desarrollo. Estos paquetes se pueden instalar ejecutando
+desde la consola de R los siguientes comandos:</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="s">"usethis"</span><span class="p">)</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">"devtools"</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div></div>
+</div>
 <div class="section" id="creacion-del-paquete">
 <h3>Creación del paquete<a class="headerlink" href="#creacion-del-paquete" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En primer lugar abrimos RStudio y en la consola de R ejecutamos el siguiente
@@ -253,9 +254,9 @@ comando:</p>
 </pre></div>
 </div>
 <p>Al ejecutar este comando se nos abrirá otra pantalla de RStudio en el
-directorio del paquete que acabamos de crear. Como podemos ver, se ha creado
-de forma automática la estructura básica del paquete (vista anteriormente)
-en el directorio <code class="docutils literal notranslate"><span class="pre">~/SIQ025</span></code> de nuestro ordenador.</p>
+directorio <code class="docutils literal notranslate"><span class="pre">~/SIQ025</span></code> de nuestro ordenador. Como podemos ver, en este
+directorio se ha creado de forma automática la estructura básica del paquete
+(vista anteriormente).</p>
 <p>Ahora, abrimos el fichero <code class="docutils literal notranslate"><span class="pre">DESCRITION</span></code>, lo rellenamos con los datos
 de nuestro paquete y lo guardamos.</p>
 <div class="admonition note">
@@ -270,7 +271,7 @@ Authors@R:
     person(given = "Aleix",
            family = "Alcacer",
            role = c("cre"),
-           email = "aalcacer@uji.com"))
+           email = "aalcacer@uji.com")
 Description: SIQ025 es un paquete de R creado en la asignatura de
     modelización de sistemas industriales. Esta asignatura está incluida
     dentro del máster en Matemática Computacional de la UJI.
@@ -282,10 +283,51 @@ RoxygenNote: 7.1.1
 </pre></div>
 </div>
 <p>Una vez completado el fichero <code class="docutils literal notranslate"><span class="pre">DESCRIPTION</span></code> pasamos a crear las funciones
-del paquete. Por ahora, solo crearemos dos funciones: una que calcule la suma
-dos números y otra que calcule la diferencia.</p>
+del paquete. Por ahora, solo implementaremos dos funciones: una que calcule la
+suma dos números y otra que calcule la diferencia.</p>
 <p>Para ello, crearemos dentro del directorio <code class="docutils literal notranslate"><span class="pre">R/</span></code> dos ficheros llamados
-<code class="docutils literal notranslate"><span class="pre">suma.R</span></code> y <code class="docutils literal notranslate"><span class="pre">resta.R</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">suma.R</span></code> y <code class="docutils literal notranslate"><span class="pre">resta.R</span></code>. En el primero de ellos, insertaremos el siguiente
+código:</p>
+<div class="highlight-R notranslate"><div class="table-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">suma</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">return</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div></div>
+<p>y en el otro, insertaremos:</p>
+<div class="highlight-R notranslate"><div class="table-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">resta</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">return</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div></div>
+<p>En este momento, ya hemos implementado nuestro pirmer paquete de R. La
+estructura que tenemos ahora tiene que ser:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/
+├── DESCRIPTION
+├── NAMESPACE
+└── R/
+    ├── suma.R
+    └── resta.R
+</pre></div>
+</div>
+<p>Finalmente, para poder usar el paquete de R, tenemos que compilar el paquete
+e instalarlo. Para ello, tenemos que ejecutar los siguientes comandos desde
+la consola de R:</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">devtools</span><span class="o">::</span><span class="nf">build</span><span class="p">()</span>    <span class="c1"># Compila el paquete</span>
+<span class="n">devtools</span><span class="o">::</span><span class="nf">install</span><span class="p">()</span>  <span class="c1"># Instala el paquete</span>
+<span class="nf">.rs.restartR</span><span class="p">()</span>       <span class="c1"># Reinicia la sessión de R</span>
+</pre></div>
+</div>
+<p>Hecho esto, ya podemos usar nuestro paquete de R desde RStudio:</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">SIQ025</span><span class="o">:::</span><span class="nf">suma</span><span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">6</span><span class="p">)</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">11</span>
+<span class="o">&gt;</span> <span class="n">SIQ025</span><span class="o">:::</span><span class="nf">resta</span><span class="p">(</span><span class="m">7</span><span class="p">,</span> <span class="m">11</span><span class="p">)</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">-4</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -351,7 +393,7 @@ dos números y otra que calcule la diferencia.</p>
 <li><a class="reference internal" href="#espacio-de-nombres">Espacio de nombres</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#ejercicio">Ejercicio</a><ul>
+<li><a class="reference internal" href="#practica">Práctica</a><ul>
 <li><a class="reference internal" href="#creacion-del-paquete">Creación del paquete</a></li>
 </ul>
 </li>
