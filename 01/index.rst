@@ -117,18 +117,19 @@ Este fichero se genera de forma automática usando el paquete `roxygen2
 <https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html>`__
 (lo veremos en profundidad en la `lección 3 <../03/index.html>`__).
 
-Ejercicio
----------
+Práctica
+--------
 
-Antes de pasar a la creación de nuestro paquete, es recomendable instalar el
-paquete `devtools <https://usethis.r-lib.org>`_, yaa que nos va facilitar
-todo el desarrollo. Este paquete se puede instalar ejecutando desde la
-consola de R el siguiente comando:
+Antes de pasar a la creación de nuestro paquete, es recomendable instalar los
+paquete `usethis <https://usethis.r-lib.org>`_ y `devtools
+<https://www.r-project.org/nosvn/pandoc/devtools.html>`__, ya que nos
+van a facilitar todo el desarrollo. Estos paquetes se pueden instalar ejecutando
+desde la consola de R los siguientes comandos:
 
 .. code-block:: R
-   :linenos:
 
    install.packages("usethis")
+   install.packages("devtools")
 
 
 Creación del paquete
@@ -142,9 +143,9 @@ comando:
    usethis::create_package("~/SIQ025")
 
 Al ejecutar este comando se nos abrirá otra pantalla de RStudio en el
-directorio del paquete que acabamos de crear. Como podemos ver, se ha creado
-de forma automática la estructura básica del paquete (vista anteriormente)
-en el directorio ``~/SIQ025`` de nuestro ordenador.
+directorio ``~/SIQ025`` de nuestro ordenador. Como podemos ver, en este
+directorio se ha creado de forma automática la estructura básica del paquete
+(vista anteriormente).
 
 Ahora, abrimos el fichero ``DESCRITION``, lo rellenamos con los datos
 de nuestro paquete y lo guardamos.
@@ -164,7 +165,7 @@ En mi caso, el fichero quedaría de la siguiente forma:
        person(given = "Aleix",
               family = "Alcacer",
               role = c("cre"),
-              email = "aalcacer@uji.com"))
+              email = "aalcacer@uji.com")
    Description: SIQ025 es un paquete de R creado en la asignatura de
        modelización de sistemas industriales. Esta asignatura está incluida
        dentro del máster en Matemática Computacional de la UJI.
@@ -175,10 +176,60 @@ En mi caso, el fichero quedaría de la siguiente forma:
    RoxygenNote: 7.1.1
 
 Una vez completado el fichero ``DESCRIPTION`` pasamos a crear las funciones
-del paquete. Por ahora, solo crearemos dos funciones: una que calcule la suma
-dos números y otra que calcule la diferencia.
+del paquete. Por ahora, solo implementaremos dos funciones: una que calcule la
+suma dos números y otra que calcule la diferencia.
 
 Para ello, crearemos dentro del directorio ``R/`` dos ficheros llamados
-``suma.R`` y ``resta.R``.
+``suma.R`` y ``resta.R``. En el primero de ellos, insertaremos el siguiente
+código:
 
 
+.. code-block:: R
+   :linenos:
+
+   suma <- function(a, b) {
+     return(a + b)
+   }
+
+
+y en el otro, insertaremos:
+
+.. code-block:: R
+   :linenos:
+
+   resta <- function(a, b) {
+     return(a - b)
+   }
+
+
+En este momento, ya hemos implementado nuestro pirmer paquete de R. La
+estructura que tenemos ahora tiene que ser:
+
+.. code-block:: none
+
+   /
+   ├── DESCRIPTION
+   ├── NAMESPACE
+   └── R/
+       ├── suma.R
+       └── resta.R
+
+Finalmente, para poder usar el paquete de R, tenemos que compilar el paquete
+e instalarlo. Para ello, tenemos que ejecutar los siguientes comandos desde
+la consola de R:
+
+.. code-block:: R
+
+   devtools::build()    # Compila el paquete
+   devtools::install()  # Instala el paquete
+   .rs.restartR()       # Reinicia la sessión de R
+
+
+Hecho esto, ya podemos usar nuestro paquete de R desde RStudio:
+
+.. code-block:: R
+
+   > SIQ025:::suma(5, 6)
+   [1] 11
+   > SIQ025:::resta(7, 11)
+   [1] -4
